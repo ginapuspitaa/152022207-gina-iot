@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Suhu dan Kelembapan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .card-group {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            flex: 1;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .card-header i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #f39c12;
+        }
+
+        .card-body h2 {
+            font-size: 2rem;
+            color: #ecf0f1;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table-custom th {
+            background-color: #34495e;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .table-custom td {
+            color: #2c3e50;
+        }
+
+        .table-custom tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        .table-custom tr:hover td {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .list-panel {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .list-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-items li {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .list-items li i {
+            color: #2980b9;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-group {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .table-custom th,
+            .table-custom td {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Data Suhu dan Kelembapan</h1>
+        </div>
+
+        <!-- Card Group for Max, Min, and Average Temperature -->
+        <div class="card-group">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-thermometer-full"></i>
+                    <div class="card-body">
+                        <h2>Maksimum Suhu: {{ data['suhumax'] }}°C</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-thermometer-empty"></i>
+                    <div class="card-body">
+                        <h2>Minimum Suhu: {{ data['suhumin'] }}°C</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <div class="card-body">
+                        <h2>Rata-rata Suhu: {{ data['suhurata'] }}°C</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table for Detailed Information -->
+        <div class="table-container">
+            <h3>Detail Data:</h3>
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Suhu (°C)</th>
+                        <th>Kelembapan (%)</th>
+                        <th>Kecerahan</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data['nilai_suhu_max_humid_max'] %}
+                    <tr>
+                        <td>{{ item['idx'] }}</td>
+                        <td>{{ item['suhu'] }}°C</td>
+                        <td>{{ item['humid'] }}%</td>
+                        <td>{{ item['kecerahan'] }}</td>
+                        <td>{{ item['timestamp'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Month-Year Max List -->
+        <div class="list-panel">
+            <h3>Month-Year Max:</h3>
+            <ul class="list-items">
+                {% for item in data['month_year_max'] %}
+                <li><i class="fas fa-calendar-alt"></i> {{ item['month_year'] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

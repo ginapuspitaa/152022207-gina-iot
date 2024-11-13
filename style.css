@@ -1,0 +1,152 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8; /* Soft light background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: #ffffff; /* Clean white background */
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #6a1b9a; /* Purple accent color */
+}
+
+.card-header i {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #6a1b9a; /* Purple accent */
+}
+
+h3 {
+    font-size: 1.8rem;
+    color: #d32f2f; /* Red accent */
+}
+
+.table-custom {
+    width: 100%;
+    border-spacing: 0;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.table-custom th, .table-custom td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #d32f2f; /* Red border for contrast */
+}
+
+.table-custom th {
+    background-color: #d32f2f; /* Red header */
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.table-custom td {
+    background-color: #ffffff;
+    font-size: 1.1rem;
+    color: #6a1b9a; /* Purple text */
+}
+
+.table-custom tr:nth-child(even) {
+    background-color: #f9fbe7; /* Light green alternate rows */
+}
+
+.table-custom tr:hover td {
+    background-color: #6a1b9a;
+    color: #fff;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.list-panel {
+    padding: 20px;
+    text-align: left;
+    margin-top: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.list-items {
+    list-style: none;
+    padding: 0;
+}
+
+.list-items li {
+    font-size: 1.1rem;
+    color: #6a1b9a; /* Purple text */
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.list-items li i {
+    color: #d32f2f; /* Red icon */
+    margin-right: 12px;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .card-group {
+        grid-template-columns: 1fr;
+    }
+
+    h2, h3 {
+        font-size: 1.2rem;
+    }
+
+    .table-custom th, .table-custom td {
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
